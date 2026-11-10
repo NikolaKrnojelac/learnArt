@@ -5,8 +5,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { HomeHeader } from "@/components/layout/HomeHeader";
 import { LoadingState } from "@/components/feedback/LoadingState";
 import { ErrorState } from "@/components/feedback/ErrorState";
-import { CategoryPills } from "@/features/artworks/componentes/CategoryPill";
-import { ArtworkFeed } from "@/features/artworks/componentes/ArtworkFeed";
+import { CategoryPills } from "@/features/artworks/components/CategoryPill";
+import { ArtworkFeed } from "@/features/artworks/components/ArtworkFeed";
 import { useArtworks } from "@/features/artworks/hooks/useArtworks";
 import {
     ALL_CATEGORY_ID,

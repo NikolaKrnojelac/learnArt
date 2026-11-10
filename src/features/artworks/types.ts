@@ -14,7 +14,8 @@ export type Artwork = {
     creditLine: string | null;
     sourceUrl: string | null;
     imageUrl: string | null;
-    aspectRatio: number; // width / height, za masonry grid
+    aspectRatio: number;
+    year: number | null;
 };
 
 export type Category = {

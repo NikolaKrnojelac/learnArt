@@ -36,3 +36,7 @@ export function formatDimensions(raw?: string | null): string | null {
         ? chosen.value
         : `${chosen.label}: ${chosen.value}`;
 }
+
+export function formatByLine(artist?: string | null, medium?:string | null){
+    return [artist ? `by ${artist}` : null, medium].filter(Boolean).join(" • ");
+}

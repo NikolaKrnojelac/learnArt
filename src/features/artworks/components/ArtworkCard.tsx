@@ -25,7 +25,6 @@ export function ArtworkCard({artwork, onPress}: ArtworkCardProps) {
                    style={StyleSheet.absoluteFill} contentFit="cover"
                    transition={200}
                    recyclingKey={String(artwork.id)}
-                   onError={(e) => console.log("IMG ERROR", artwork.imageUrl, e.error)}
             />
             <LinearGradient
                 colors={["transparent", "rgba(0,0,0,0.6)"]}

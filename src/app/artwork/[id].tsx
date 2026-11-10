@@ -7,9 +7,9 @@ import { CalloutCard } from "@/components/ui/CalloutCard";
 import { InfoSection } from "@/components/ui/InfoSection";
 import { LoadingState } from "@/components/feedback/LoadingState";
 import { ErrorState } from "@/components/feedback/ErrorState";
-import { ArtworkHero } from "@/features/artworks/componentes/ArtworkHero";
-import { FactGrid } from "@/features/artworks/componentes/FactGrid";
-import { MuseumCredit } from "@/features/artworks/componentes/MuseumCredit";
+import { ArtworkHero } from "@/features/artworks/components/ArtworkHero";
+import { FactGrid } from "@/features/artworks/components/FactGrid";
+import { MuseumCredit } from "@/features/artworks/components/MuseumCredit";
 import { useArtwork } from "@/features/artworks/hooks/useArtwork";
 
 export default function ArtworkDetailScreen() {

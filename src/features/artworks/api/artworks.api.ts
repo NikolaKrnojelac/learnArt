@@ -1,8 +1,7 @@
 import type { Artwork } from "../types";
 import rawArtworks from "../data/raw-artworks.json";
 import { capitalizeFirst, formatDimensions } from "../utils/format";
-
-
+import {parseYear} from "@/features/artworks/utils/year";
 
 
 type ApiCreator = {
@@ -75,6 +74,7 @@ const toArtwork = (item: ApiArtwork): Artwork => {
         sourceUrl: item.url ?? null,
         imageUrl: web?.url ?? null,
         aspectRatio: width && height ? width / height : 1,
+        year: parseYear(item.creation_date)
     };
 };
 
@@ -93,4 +93,11 @@ export async function getArtworks({
 export async function getArtworkById(id: number): Promise<Artwork | null> {
     const item = (rawArtworks as ApiArtwork[]).find((i) => i.id === id);
     return item ? toArtwork(item) : null;
+}
+
+let allArtworksCache: Artwork[] | null = null;
+
+export function getAllArtworks(): Artwork[] {
+    allArtworksCache ??= (rawArtworks as unknown as ApiArtwork[]).map(toArtwork)
+    return  allArtworksCache
 }
