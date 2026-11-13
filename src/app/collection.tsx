@@ -7,9 +7,10 @@ import { LoadingState } from "@/components/feedback/LoadingState";
 import { ErrorState } from "@/components/feedback/ErrorState";
 import { EmptyState } from "@/components/feedback/EmptyState";
 import { ArtworkFeed } from "@/features/artworks/components/ArtworkFeed";
-import { CollectionHeader } from "@/features/collections/components/CollectionHeader";
 import { useCollection } from "@/features/collections/hooks/useCollection";
 import type { CollectionKind } from "@/features/collections/types";
+import {ListHeading} from "@/components/ui/ListHeading";
+import {formatWorkCount} from "@/features/artworks/utils/format";
 
 export default function CollectionScreen() {
     const { kind, value } = useLocalSearchParams<{
@@ -39,9 +40,9 @@ export default function CollectionScreen() {
                         artworks={data.artworks}
                         bottomPadding={32}
                         header={
-                            <CollectionHeader
+                            <ListHeading
                                 title={data.title}
-                                count={data.artworks.length}
+                                subtitle={formatWorkCount(data.artworks.length)}
                             />
                         }
                         onArtworkPress={(artwork) =>

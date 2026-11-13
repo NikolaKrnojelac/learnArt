@@ -101,3 +101,10 @@ export function getAllArtworks(): Artwork[] {
     allArtworksCache ??= (rawArtworks as unknown as ApiArtwork[]).map(toArtwork)
     return  allArtworksCache
 }
+
+export async function getArtworksByIds(ids: number[]): Promise<Artwork[]> {
+    const byId = new Map(getAllArtworks().map((artwork) => [artwork.id, artwork]));
+    return ids
+        .map((id) => byId.get(id))
+        .filter((artwork): artwork is Artwork => Boolean(artwork));
+}

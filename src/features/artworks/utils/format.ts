@@ -40,3 +40,7 @@ export function formatDimensions(raw?: string | null): string | null {
 export function formatByLine(artist?: string | null, medium?:string | null){
     return [artist ? `by ${artist}` : null, medium].filter(Boolean).join(" • ");
 }
+
+export function formatWorkCount(count: number) {
+    return count === 1 ? "1 work" : `${count} works`;
+}
