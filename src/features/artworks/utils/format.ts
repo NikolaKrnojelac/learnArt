@@ -44,3 +44,4 @@ export function formatByLine(artist?: string | null, medium?:string | null){
 export function formatWorkCount(count: number) {
     return count === 1 ? "1 work" : `${count} works`;
 }
+

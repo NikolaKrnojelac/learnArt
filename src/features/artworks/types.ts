@@ -23,3 +23,9 @@ export type Category = {
     label: string;
     artworkType: string | null;
 };
+
+export type ArtworkQuery = {
+    artworkType?: string | null;
+    regions?: string[];
+    yearRange?: [number, number] | null;
+};

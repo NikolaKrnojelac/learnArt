@@ -26,6 +26,7 @@ export default function RootLayout() {
                 <Stack.Screen name="(tabs)" />
                 <Stack.Screen name="artwork/[id]" />
                 <Stack.Screen name="collection" />
+                <Stack.Screen name="filters" options={{ presentation: "containedModal", gestureEnabled: false }} />
             </Stack>
         </QueryClientProvider>
 

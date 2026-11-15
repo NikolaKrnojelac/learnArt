@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
-import {FavoriteIcon} from "@/components/ui/FavoriteIcon";
 import {Bookmark} from "lucide-react-native";
 
 type ArtworkHeroProps = {

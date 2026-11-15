@@ -1,7 +1,8 @@
-import type { Artwork } from "../types";
+import type { Artwork, ArtworkQuery } from "../types";
 import rawArtworks from "../data/raw-artworks.json";
 import { capitalizeFirst, formatDimensions } from "../utils/format";
 import {parseYear} from "@/features/artworks/utils/year";
+import { getRegion } from "../utils/region";
 
 
 type ApiCreator = {
@@ -35,8 +36,7 @@ type ApiArtwork = {
 type GetArtworksParams = {
     page?: number;
     limit?: number;
-    artworkType?: string | null;
-};
+} & ArtworkQuery;
 
 const stripHtml = (value?: string | null) =>
     value ? value.replace(/<[^>]*>/g, "").trim() || null : null;
@@ -78,16 +78,39 @@ const toArtwork = (item: ApiArtwork): Artwork => {
     };
 };
 
+export function filterArtworks(
+    artworks: Artwork[],
+    { artworkType = null, regions = [], yearRange = null }: ArtworkQuery = {}
+): Artwork[] {
+    return artworks.filter((artwork) => {
+        if (artworkType && artworkType !== artwork.artworkType) return false;
+
+        if (regions.length > 0) {
+            const region = getRegion(artwork.culture);
+            if (!region || !regions.includes(region)) return false;
+        }
+
+        if (yearRange) {
+            if (artwork.year === null) return false;
+            if (artwork.year < yearRange[0] || artwork.year > yearRange[1]) return false;
+        }
+
+        return true;
+    });
+}
+
 export async function getArtworks({
                                       page = 1,
                                       limit = 20,
-                                      artworkType = null,
+                                      ...query
                                   }: GetArtworksParams = {}): Promise<Artwork[]> {
-    const items = (rawArtworks as ApiArtwork[]).filter(
-        (item) => !artworkType || item.type === artworkType
-    );
+    const items = filterArtworks(getAllArtworks(), query);
     const start = (page - 1) * limit;
-    return items.slice(start, start + limit).map(toArtwork);
+    return items.slice(start, start + limit);
+}
+
+export async function countArtworks(query: ArtworkQuery): Promise<number> {
+    return filterArtworks(getAllArtworks(), query).length;
 }
 
 export async function getArtworkById(id: number): Promise<Artwork | null> {
